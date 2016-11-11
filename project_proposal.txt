@@ -6,13 +6,18 @@ Team Members:
 
 Description:
 
-We plan to develop the abstract strategy board game Gomoku (also called Five in a Row) using python, with the interface displayed on the computer screen. On a Go board with 15*15 intersections, two users (one has black stones and the other has white stones) alternate in placing one single stone of their color on an empty intersection. Once placed, stones are not moved or removed from the board. The winner is the first player to get an unbroken row of five stones of the one’s color horizontally, vertically, or diagonally. Note that it is not required to have a row of exactly five stones for a win; a row of more than five stones also qualifies.
+We plan to develop the abstract strategy board game Gomoku (also called Five in a Row) using python, with the
+interface displayed on the computer screen. On a Go board with 15*15 intersections, two users (one has black
+stones and the other has white stones) alternate in placing one single stone of their color on an empty
+intersection. Once placed, stones are not moved or removed from the board. The winner is the first player to
+get an unbroken row of five stones of the oneâ€™s color horizontally, vertically, or diagonally. Note that it is
+not required to have a row of exactly five stones for a win; a row of more than five stones also qualifies.
 
 This project is comprised of two major components: searching algorithm and evaluating function.
 1. Searching algorithm. 
 	- MiniMax Game Tree: predicts and chooses the next move according to results from evaluating function
-	- Alpha-Beta Pruning: decreases the number of nodes that are evaluated by the minimax 
-	  algorithm in its search tree. 
+	- Alpha-Beta Pruning: decreases the number of nodes that are evaluated by the minimax algorithm in
+	its search tree. 
 2. Evaluating function
 	Assign a value to each intersection on the board based on the rules of the game.
 
