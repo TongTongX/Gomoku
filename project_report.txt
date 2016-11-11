@@ -23,7 +23,7 @@ We developed the abstract strategy board game Gomoku (also called Gobang, Five i
 with the interface displayed on the computer screen. On a Go board with 15*15 intersections, two 
 users (one has black stones and the other has white stones) alternate in placing one single stone 
 of their color on an empty intersection. Once placed, stones are not moved or removed from the board. 
-The winner is the first player to get an unbroken row of five stones of the one’s color horizontally, 
+The winner is the first player to get an unbroken row of five stones of the oneâ€™s color horizontally, 
 vertically, or diagonally. Note that it is not required to have a row of exactly five stones for a win;
 a row of more than five stones also qualifies.
 
@@ -73,22 +73,22 @@ This project is comprised of 4 major components stated below:
 	- Define a lsit self.count to store the count of each situation: count[black/white][situation]
 
 	- Define a few functions to do the following in this object:
-		reset (self)								reset data
+		reset (self)			reset data
 		
-		evaluate (self, board, turn)				analyze & evaluate board 
-													return score based on analysis result
+		evaluate (self, board, turn)	analyze & evaluate board 
+						return score based on analysis result
 		
-		__evaluate (self, board, turn)				analyze & evaluate board in 4 directinos: horizontal, 
-														vertical, diagonal(left-hand or right-hand)
-													return score difference between players based on analysis result
+		__evaluate (self, board, turn)	analyze & evaluate board in 4 directinos: horizontal, 
+						vertical, diagonal(left-hand or right-hand)
+						return score difference between players based on analysis result
 		
-		__analysis_horizon (self, board, i, j)			anaylze horizontally
-		__analysis_vertical (self, board, i, j)			analyze vertically
-		__analysis_left (self, board, i, j)				analyze left-hand diagonally
-		__analysis_right (self, board, i, j)			analyzed right-hand diagonally
+		__analysis_horizon (self, board, i, j)		anaylze horizontally
+		__analysis_vertical (self, board, i, j)		analyze vertically
+		__analysis_left (self, board, i, j)		analyze left-hand diagonally
+		__analysis_right (self, board, i, j)		analyzed right-hand diagonally
 		
 		analysis_line (self, line, record, num, pos)	analyze a line, find out different situations
-														(i.e., five, four, three, etc)
+								(i.e., five, four, three, etc)
 
 
 3. Searcher object
@@ -98,15 +98,15 @@ This project is comprised of 4 major components stated below:
 
 	- Define a few functions to do the following in this object:
 		genMoves (self, turn)
-											generate all possible moves for the current board and store the 
-											score and position of each move in a list in format of (score, i, j).
+					generate all possible moves for the current board and store the 
+					score and position of each move in a list in format of (score, i, j).
 		
 		__search (self, turn, depth, alpha = -0x7fffffff, beta = 0x7fffffff)
-											recursive search, returns the best score
-											minimax algorithm with alpha-beta pruning
-											0x7fffffff == (2^31)-1, indicating a large value
+					recursive search, returns the best score
+					minimax algorithm with alpha-beta pruning
+					0x7fffffff == (2^31)-1, indicating a large value
 
-		search (self, turn, depth = 3)				# specific search
+		search (self, turn, depth = 3)		# specific search
 	
 	- Note: alpha beta pruning: removes nodes that are evaluated by the minimax algorithm
 			in the search tree, eliminates branches that cannot posibbly influence the final decision.
