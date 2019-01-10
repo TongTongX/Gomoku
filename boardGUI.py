@@ -20,6 +20,9 @@ class Board_Canvas(Tkinter.Canvas):
 		self.turn = 2
 		self.undo = False
 		self.depth = 2
+		self.prev_exist = False
+		self.prev_row = 0
+		self.prev_col = 0
 	
 
 	'''
@@ -64,10 +67,20 @@ class Board_Canvas(Tkinter.Canvas):
 
 
 	'''
-		Draw a stone on a given intersection. Specify the color of the stone depending on the turn.
+		Draw a stone (with a circle on it to denote latest move) on a given intersection. Specify the color of the stone depending on the turn.
 		Args: row, col (i.e.coord of an intersection) 
 	'''
 	def draw_stone(self, row, col):
+		inner_start_x = (row + 1) * 30 - 4
+		inner_start_y = (col + 1) * 30 - 4
+		inner_end_x = (row + 1) * 30 + 4
+		inner_end_y = (col + 1) * 30 + 4
+
+		outer_start_x = (row + 1) * 30 - 6
+		outer_start_y = (col + 1) * 30 - 6
+		outer_end_x = (row + 1) * 30 + 6
+		outer_end_y = (col + 1) * 30 + 6
+
 		start_pixel_x = (row + 1) * 30 - 10
 		start_pixel_y = (col + 1) * 30 - 10
 		end_pixel_x = (row + 1) * 30 + 10
@@ -75,8 +88,27 @@ class Board_Canvas(Tkinter.Canvas):
 		
 		if self.turn == 1:
 			self.create_oval(start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y, fill='black')
+			self.create_oval(outer_start_x, outer_start_y, outer_end_x, outer_end_y, fill='white')
+			self.create_oval(inner_start_x, inner_start_y, inner_end_x, inner_end_y, fill='black')
 		elif self.turn == 2:
 			self.create_oval(start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y, fill='white')
+			self.create_oval(outer_start_x, outer_start_y, outer_end_x, outer_end_y, fill='black')
+			self.create_oval(inner_start_x, inner_start_y, inner_end_x, inner_end_y, fill='white')
+
+	'''
+		Draw the previous stone with single color. Specify the color of the stone depending on the turn.
+		Args: row, col (i.e.coord of an intersection) 
+	'''
+	def draw_prev_stone(self, row, col):
+		start_pixel_x = (row + 1) * 30 - 10
+		start_pixel_y = (col + 1) * 30 - 10
+		end_pixel_x = (row + 1) * 30 + 10
+		end_pixel_y = (col + 1) * 30 + 10
+		
+		if self.turn == 1:
+			self.create_oval(start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y, fill='white')
+		elif self.turn == 2:
+			self.create_oval(start_pixel_x, start_pixel_y, end_pixel_x, end_pixel_y, fill='black')
 
 
 	'''
@@ -112,6 +144,11 @@ class Board_Canvas(Tkinter.Canvas):
 						invalid_pos = False
 						row, col = i, j
 						self.draw_stone(i,j)
+						if self.prev_exist == False:
+							self.prev_exist = True
+						else:
+							self.draw_prev_stone(self.prev_row, self.prev_col)
+						self.prev_row, self.prev_col = i, j
 						# unbind to ensure the user cannot click anywhere until the program
 						# has placed a white stone already
 						self.unbind('<Button-1>')
@@ -149,6 +186,11 @@ class Board_Canvas(Tkinter.Canvas):
 		print 'Program has moved to %s \n' % coord
 		self.b.board()[row][col] = 2
 		self.draw_stone(row,col)
+		if self.prev_exist == False:
+			self.prev_exist = True
+		else:
+			self.draw_prev_stone(self.prev_row, self.prev_col)
+		self.prev_row, self.prev_col = row, col
 		self.b.show()
 		print '\n'
 
